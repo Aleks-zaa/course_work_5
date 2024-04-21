@@ -3,7 +3,8 @@ import requests
 
 class HHParser:
 
-    def get_request(self):
+    @staticmethod
+    def get_request():
         params = {
             "per_page": 10,
             "sort_by": "by_vacancies_open"
@@ -19,10 +20,11 @@ class HHParser:
             employers.append({"id": employer["id"], "name": employer["name"]})
         return employers
 
-    def get_vacancies_from_company(self, id):
+    @staticmethod
+    def get_vacancies_from_company(employer_id):
         params = {
             "per_page": 20,
-            "employer_id": id
+            "employer_id": employer_id
         }
         response = requests.get("http://api.hh.ru/vacancies/", params)
         if response.status_code == 200:
@@ -55,6 +57,3 @@ class HHParser:
             })
         return filter_data
 
-
-hh = HHParser()
-print(hh.filter_vacancies())

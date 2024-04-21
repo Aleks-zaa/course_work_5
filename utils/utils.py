@@ -1,9 +1,11 @@
 import psycopg2
-from config import config
+from utils.config import config
 from classes.HHParser import HHParser
 
 
 def create_database(db_name):
+    """Функция создания базы данных"""
+
     conn = psycopg2.connect(dbname="postgres", **config())
     conn.autocommit = True
     cur = conn.cursor()
@@ -15,7 +17,9 @@ def create_database(db_name):
 
 
 def create_tables(db_name):
-    conn = psycopg2.connect(dbname="HH_BASE", **config())
+    """Функция создания таблиц"""
+
+    conn = psycopg2.connect(dbname="db_hh", **config())
     with conn:
         with conn.cursor() as cur:
             cur.execute('''CREATE TABLE employers 
@@ -37,10 +41,12 @@ def create_tables(db_name):
 
 
 def insert_data_into_tables(db_name):
+    """Функция заполнения таблиц"""
+
     hh = HHParser()
     employers = hh.get_employers()
     vacancies = hh.filter_vacancies()
-    conn = psycopg2.connect(dbname='HH_BASE', **config())
+    conn = psycopg2.connect(dbname='db_hh', **config())
     with conn:
         with conn.cursor() as cur:
             for employer in employers:
@@ -55,6 +61,33 @@ def insert_data_into_tables(db_name):
     conn.close()
 
 
-create_database("HH_BASE")
-create_tables("HH_BASE")
-insert_data_into_tables("HH_BASE")
+def print_vacancy(data):
+    """Функция вывода вакансий"""
+
+    for vacancy in data:
+        print("================================================================")
+        print(f"Работодатель - {vacancy[0]}")
+        print(f"Должность - {vacancy[1]}")
+        if vacancy[2] == 0 and vacancy[3] == 0:
+            print(f"Оклад - по договоренности ")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == 0 or vacancy[3] == 0:
+            if vacancy[2] == 0:
+                print(f"Оклад до {vacancy[3]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+            else:
+                print(f"Оклад от {vacancy[2]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == vacancy[3]:
+            print(f"Оклад - {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        else:
+            print(f"Оклад от {vacancy[2]} до {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+
+
+
+
+# create_database("db_name")
+# create_tables("db_name")
+# insert_data_into_tables("db_name")
