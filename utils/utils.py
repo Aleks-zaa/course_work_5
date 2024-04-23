@@ -86,8 +86,91 @@ def print_vacancy(data):
             print(f"Ссылка на вакансию - {vacancy[4]}")
 
 
+def print_vacancy1(data):
+    """Функция вывода  всех компаний и вакансий у каждой компании"""
+
+    for vacancy in data:
+        print("================================================================")
+        print(f"Работодатель - {vacancy[0]}")
+        print(f"Колличество вакансий - {vacancy[1]}")
 
 
-# create_database("db_name")
-# create_tables("db_name")
-# insert_data_into_tables("db_name")
+def print_vacancy2(data):
+    """Функция вывода всех вакансий"""
+
+    for vacancy in data:
+        print("================================================================")
+        print(f"Работодатель - {vacancy[0]}")
+        print(f"Должность - {vacancy[1]}")
+        if vacancy[2] == 0 and vacancy[3] == 0:
+            print(f"Оклад - по договоренности ")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == 0 or vacancy[3] == 0:
+            if vacancy[2] == 0:
+                print(f"Оклад до {vacancy[3]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+            else:
+                print(f"Оклад от {vacancy[2]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == vacancy[3]:
+            print(f"Оклад - {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        else:
+            print(f"Оклад от {vacancy[2]} до {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+
+
+def print_vacancy3(data):
+    """Функция вывода средней з.п"""
+
+    print(f"Средняя з.п. - {data[0]}")
+
+
+def print_vacancy4(data):
+    """Функция вывода всех вакансий, у которых зарплата выше средней по всем вакансия"""
+
+    for vacancy in data:
+        print("================================================================")
+        print(f"Работодатель - {vacancy[0]}")
+        print(f"Должность - {vacancy[1]}")
+        if vacancy[2] == 0 and vacancy[3] == 0:
+            print(f"Оклад - по договоренности ")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == 0 or vacancy[3] == 0:
+            if vacancy[2] == 0:
+                print(f"Оклад до {vacancy[3]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+            else:
+                print(f"Оклад от {vacancy[2]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == vacancy[3]:
+            print(f"Оклад - {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        else:
+            print(f"Оклад от {vacancy[2]} до {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+
+
+def print_vacancy5(data):
+    """Функция вывода всех вакансий по ключевому слову."""
+
+    for vacancy in data:
+        print("================================================================")
+        print(f"Работодатель - {vacancy[0]}")
+        print(f"Должность - {vacancy[1]}")
+        if vacancy[2] == 0 and vacancy[3] == 0:
+            print(f"Оклад - по договоренности ")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == 0 or vacancy[3] == 0:
+            if vacancy[2] == 0:
+                print(f"Оклад до {vacancy[3]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+            else:
+                print(f"Оклад от {vacancy[2]}")
+                print(f"Ссылка на вакансию - {vacancy[4]}")
+        elif vacancy[2] == vacancy[3]:
+            print(f"Оклад - {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
+        else:
+            print(f"Оклад от {vacancy[2]} до {vacancy[3]}")
+            print(f"Ссылка на вакансию - {vacancy[4]}")
