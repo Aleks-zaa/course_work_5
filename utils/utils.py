@@ -156,8 +156,7 @@ def print_vacancy5(data):
 
     for vacancy in data:
         print("================================================================")
-        print(f"Работодатель - {vacancy[0]}")
-        print(f"Должность - {vacancy[1]}")
+        print(f"Вакансия - {vacancy[1]}")
         if vacancy[2] == 0 and vacancy[3] == 0:
             print(f"Оклад - по договоренности ")
             print(f"Ссылка на вакансию - {vacancy[4]}")
